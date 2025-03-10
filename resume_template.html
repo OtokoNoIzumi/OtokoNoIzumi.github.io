@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>屈源的简历</title>
+    <title>{{ basic_info.name }}的简历</title>
     <link rel="stylesheet" href="styles.css">
     <script src="passwordless.js"></script>
 </head>
@@ -14,12 +14,12 @@
     <div class="container">
         <header>
             <div class="profile">
-                <img src="photo.jpg" alt="屈源的照片" class="profile-image">
+                <img src="photo.jpg" alt="{{ basic_info.name }}的照片" class="profile-image">
                 <div class="profile-info">
-                    <h1>屈源</h1>
-                    <p class="subtitle">AI技术负责人 / AI工具开发</p>
+                    <h1>{{ basic_info.name }}</h1>
+                    <p class="subtitle">{{ basic_info.position }}</p>
                     <div class="contact-info">
-                        <p>📍 深圳市南山区</p>
+                        <p>📍 {{ basic_info.location }}</p>
                         <!-- 敏感信息占位符 -->
                         <p>📱 <span data-sensitive="phone">（需要访问权限查看）</span></p>
                         <p>📧 <span data-sensitive="email">（需要访问权限查看）</span></p>
@@ -34,36 +34,33 @@
 
         <section class="summary">
             <h2>个人简介</h2>
-            <p>具创始人视角的技术与产品复合人才，8年游戏产业经验，现专注AI应用层创业。主导两款不同品类游戏产品（首月收入均过亿），擅长从0到1构建系统并推动全流程优化。自主掌握Python和AI开发，实现多项技术革新并创造显著业务价值。deeplearning.ai学习时长前1%。</p>
+            <p>{{ summary }}</p>
         </section>
 
         <section class="experience">
             <h2>工作经历</h2>
 
+            {% for job in experience %}
             <div class="job">
                 <div class="job-header">
-                    <h3>寻根信智管理咨询工作室</h3>
-                    <span class="date">2024-03 至今</span>
+                    <h3>{{ job.company }}</h3>
+                    <span class="date">{{ job.period }}</span>
                 </div>
-                <p class="position">创始人</p>
-                <p>深度咨询并构建管理地图后进行流程再造优化，形成可落地的AI交付产品。有深度咨询，前后端全栈开发，React技术框架，运维发布的全部操盘经验。</p>
-            </div>
+                <p class="position">{{ job.position }}</p>
+                <p>{{ job.description }}</p>
 
-            <div class="job">
-                <div class="job-header">
-                    <h3>深圳市幻动无极有限公司</h3>
-                    <span class="date">2021-04 至 2024-03</span>
-                </div>
-                <p class="position">执行制作人</p>
-                <p>与制作人共同规划项目长期战略，对版本内容、品质与研发流程负责。</p>
-
-                <h4>AI转型与技术创新：</h4>
+                {% if job.highlights %}
+                {% for highlight in job.highlights %}
+                <h4>{{ highlight.title }}：</h4>
                 <ul>
-                    <li>图标生产革新：独立设计并实现基于AI的图标生产流程，5天内完成112套装备图标。</li>
-                    <li>翻译工具开发：开发AI辅助翻译自动化处理工具，消除人工操作步骤。</li>
-                    <li>版本管理：优化多部门协作流程，让多线版本合入工作从小组精简至1人完成。</li>
+                    {% for item in highlight.items %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
                 </ul>
+                {% endfor %}
+                {% endif %}
             </div>
+            {% endfor %}
         </section>
 
         <section class="skills">
