@@ -1,153 +1,402 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>屈源的简历</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="passwordless.js"></script>
-</head>
-<body>
-    <!-- 退出按钮 - 默认隐藏 -->
-    <button id="logout-button" class="logout-button" onclick="logOut()" style="display: none;">退出查看</button>
+    <title>Izumi.屈源 - 个人主页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        // 深色模式控制
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
 
-    <div class="container">
-        <header>
-            <div class="profile">
-                <img src="photo.jpg" alt="屈源的照片" class="profile-image">
-                <div class="profile-info">
-                    <h1>屈源</h1>
-                    <p class="subtitle">AI技术负责人 / AI工具开发</p>
-                    <div class="contact-info">
-                        <p>📍 深圳市南山区</p>
-                        <!-- 敏感信息占位符 -->
-                        <p>📱 <span data-sensitive="phone">（需要访问权限查看）</span></p>
-                        <p>📧 <span data-sensitive="email">（需要访问权限查看）</span></p>
-                        <!-- 公开版本提示 -->
-                        <div class="public-notice">
-                            <p class="notice-text">请通过完整链接访问以查看联系方式</p>
+        // 配置 Tailwind
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: 0, transform: 'translateY(10px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        }
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer components {
+            .card {
+                @apply bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 dark:shadow-gray-900/30;
+            }
+            .btn {
+                @apply px-4 py-2 rounded-md font-medium transition-all duration-200 transform hover:scale-105;
+            }
+            .btn-primary {
+                @apply bg-primary-500 text-white hover:bg-primary-600;
+            }
+            .btn-outline {
+                @apply border border-gray-300 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 hover:text-primary-500 dark:hover:text-primary-400;
+            }
+            .nav-link {
+                @apply px-3 py-2 rounded-md font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors;
+            }
+            .section {
+                @apply py-10 md:py-16 animate-fade-in;
+            }
+            .container-custom {
+                @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+            }
+            .heading-xl {
+                @apply text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8;
+            }
+            .heading-lg {
+                @apply text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6;
+            }
+            .body-text {
+                @apply text-gray-700 dark:text-gray-300 leading-relaxed;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-200">
+    <!-- 导航栏 -->
+    <nav class="bg-white dark:bg-gray-800 sticky top-0 z-50 shadow-sm">
+        <div class="container-custom">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <span class="text-xl font-bold text-primary-600 dark:text-primary-400">Izumi.屈源</span>
+                </div>
+                <div class="flex items-center space-x-2 md:space-x-4">
+                    <a href="#projects" class="nav-link">项目作品</a>
+                    <a href="#about" class="nav-link">关于我</a>
+                    <a href="#support" class="nav-link">支持我</a>
+                    <button id="theme-toggle" class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="flex-grow">
+        <!-- 头部区块 -->
+        <section class="section bg-gradient-to-br from-primary-500/10 to-primary-600/10 dark:from-primary-900/20 dark:to-primary-800/20">
+            <div class="container-custom">
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white leading-tight">
+                            嗨，我是<span class="text-primary-600 dark:text-primary-400">Izumi.屈源</span>
+                        </h1>
+                        <p class="body-text text-lg mb-6">
+                            欢迎来到我的个人空间！我是一名从游戏研发转向AI创新的技术产品人，目前正在AI应用层创业，为企业提供管理咨询和定制化AI解决方案。
+                        </p>
+                        <p class="body-text text-lg mb-6">
+                            这里记录着我的项目、思考和创作。如果你对AI应用、流程优化或产品设计有兴趣，希望我们能有共同话题！
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#projects" class="btn btn-primary">
+                                <i class="fas fa-rocket mr-2"></i>探索我的项目
+                            </a>
+                            <a href="https://github.com/OtokoNoIzumi" target="_blank" class="btn btn-outline">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                            <a href="https://space.bilibili.com/82205" target="_blank" class="btn btn-outline">
+                                <i class="fab fa-bilibili mr-2"></i>Bilibili
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="relative">
+                            <div class="w-64 h-64 md:w-80 md:h-80 flex items-center justify-center">
+                                <img src="head.png" alt="Izumi.屈源" class="w-full h-full object-contain">
+                            </div>
+                            <div class="absolute -bottom-3 -right-3 bg-white dark:bg-gray-800 py-2 px-4 rounded-full shadow-lg">
+                                <span class="font-medium text-primary-600 dark:text-primary-400">AI 技术负责人</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
-
-        <section class="summary">
-            <h2>个人简介</h2>
-            <p>具创始人视角的技术与产品复合人才，8年游戏产业经验，现专注AI应用层创业。主导两款不同品类游戏产品（首月收入均过亿），擅长从0到1构建系统并推动全流程优化。自主掌握Python和AI开发，实现多项技术革新并创造显著业务价值。deeplearning.ai学习时长前1%。</p>
         </section>
 
-        <section class="experience">
-            <h2>工作经历</h2>
-
-            <div class="job">
-                <div class="job-header">
-                    <h3>寻根信智管理咨询工作室</h3>
-                    <span class="date">2024-03 至今</span>
-                </div>
-                <p class="position">创始人</p>
-                <p>深度咨询并构建管理地图后进行流程再造优化，形成可落地的AI交付产品。有深度咨询，前后端全栈开发，React技术框架，运维发布的全部操盘经验。</p>
-            </div>
-
-            <div class="job">
-                <div class="job-header">
-                    <h3>深圳市幻动无极有限公司</h3>
-                    <span class="date">2021-04 至 2024-03</span>
-                </div>
-                <p class="position">执行制作人</p>
-                <p>与制作人共同规划项目长期战略，对版本内容、品质与研发流程负责。</p>
-
-                <h4>AI转型与技术创新：</h4>
-                <ul>
-                    <li>图标生产革新：独立设计并实现基于AI的图标生产流程，5天内完成112套装备图标。</li>
-                    <li>翻译工具开发：开发AI辅助翻译自动化处理工具，消除人工操作步骤。</li>
-                    <li>版本管理：优化多部门协作流程，让多线版本合入工作从小组精简至1人完成。</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="skills">
-            <h2>技能与自研产品</h2>
-            <div class="skills-container">
-                <div class="skill-group">
-                    <h3>技术技能</h3>
-                    <ul>
-                        <li><strong>Python</strong> - 精通</li>
-                        <li><strong>AI</strong> - 熟练</li>
-                        <li><strong>数据分析</strong> - 精通</li>
-                        <li><strong>Notion/多维表格</strong> - 精通</li>
-                    </ul>
-                </div>
-                <div class="skill-group">
-                    <h3>自研产品</h3>
-                    <ul>
-                        <li>方案神器</li>
-                        <li>AI泉酱（无提示词图片风格迁移）</li>
-                        <li>AI私董会</li>
-                        <li>B站切片广告之友</li>
-                        <li>AI跑团游戏</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- 敏感区域 - 教育背景 -->
-        <section id="education-section" class="education sensitive-section" style="display: none;">
-            <h2>教育背景</h2>
-            <div id="education-content">
-                <!-- 这里的内容会通过JavaScript动态加载 -->
-            </div>
-        </section>
-
-        <!-- 教育部分的公开提示 -->
-        <section class="education public-notice">
-            <h2>教育背景</h2>
-            <p class="notice-text">（完整的教育信息需要通过邀请链接访问）</p>
-        </section>
-    </div>
-
-    <script>
-        // 用于加载教育信息的额外脚本
-        function loadEducationContent(educationData) {
-            const container = document.getElementById('education-content');
-            if (!container || !educationData) return;
-
-            // 清空现有内容
-            container.innerHTML = '';
-
-            // 添加每个教育经历
-            educationData.forEach(edu => {
-                const html = `
-                    <div class="edu-item">
-                        <h3>${edu.school}</h3>
-                        <p class="date">${edu.period}</p>
-                        <p>${edu.details}</p>
+        <!-- 个人简介 -->
+        <section id="about" class="section">
+            <div class="container-custom">
+                <h2 class="heading-xl">关于我</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 space-y-4">
+                        <p class="body-text">
+                            我曾主导过两款不同品类的游戏产品，它们的首月收入均过亿。我擅长从0到1构建系统并推动全流程优化，通过自主学习Python和AI开发，我实现了多个工作流程的技术革新，并在实际生产环境中创造了显著价值。
+                        </p>
+                        <p class="body-text">
+                            我擅长识别业务痛点，设计并亲自实现系统化解决方案。作为deeplearning.ai学习时长前1%的学习者，我持续关注AI领域的最新发展并将其应用于实际业务中。
+                        </p>
+                        <p class="body-text">
+                            目前，我正在开发一系列AI辅助工具，旨在提高工作效率并解决实际问题。我相信技术的价值在于服务人类，简化复杂流程，让我们能够专注于真正重要的事情。
+                        </p>
+                        <div class="pt-4">
+                            <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">我的核心技能</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full">Python</span>
+                                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full">AI</span>
+                                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full">数据分析</span>
+                                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full">Notion/多维表格</span>
+                                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full">产品设计</span>
+                                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full">流程优化</span>
+                            </div>
+                        </div>
                     </div>
-                `;
-                container.innerHTML += html;
+                    <div class="card p-6 h-fit">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">我正在关注</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-primary-500 mt-1.5 mr-2"></i>
+                                <span class="body-text">人工智能在管理咨询中的应用</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-primary-500 mt-1.5 mr-2"></i>
+                                <span class="body-text">自动化工作流与流程再造</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-primary-500 mt-1.5 mr-2"></i>
+                                <span class="body-text">可成长和自我驱动的数字分身</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-primary-500 mt-1.5 mr-2"></i>
+                                <span class="body-text">顶尖的美好ACGN作品如芙莉莲、金牌得主</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-circle text-xs text-primary-500 mt-1.5 mr-2"></i>
+                                <span class="body-text">身材曲线和运动能力康复</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 项目展示 -->
+        <section id="projects" class="section bg-gray-100 dark:bg-gray-800/50">
+            <div class="container-custom">
+                <h2 class="heading-xl">项目作品</h2>
+
+                <!-- B站切片广告之友 -->
+                <div class="card mb-10 group">
+                    <div class="grid md:grid-cols-5 gap-6">
+                        <div class="md:col-span-2 overflow-hidden">
+                            <div class="h-full bg-gray-200 dark:bg-gray-700 rounded-l-xl flex items-center justify-center">
+                                <div class="text-center p-8">
+                                    <i class="fas fa-video text-6xl text-primary-400 mb-4"></i>
+                                    <h3 class="text-xl font-bold text-gray-700 dark:text-gray-200">B站切片广告之友</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Chrome 插件（即将上架）</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:col-span-3 p-6 md:p-8">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">B站切片广告之友</h3>
+                                <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm">即将发布</span>
+                            </div>
+                            <p class="body-text mb-4">
+                                自动识别并跳过B站视频中的各类广告内容，包括口播、贴片等，让您专注于内容本身。结合AI技术，准确识别视频中的广告片段，无需繁琐设置。
+                            </p>
+                            <div class="mb-6">
+                                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">主要功能：</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                        <span class="body-text">智能识别多种广告类型</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                        <span class="body-text">自动跳过或标记广告片段</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                        <span class="body-text">用户反馈与持续优化系统</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="flex flex-wrap gap-3">
+                                <a href="#" class="btn btn-outline opacity-50 cursor-not-allowed">
+                                    <i class="fab fa-chrome mr-2"></i>即将上架Chrome商店
+                                </a>
+                                <a href="https://github.com/OtokoNoIzumi/adskip" target="_blank" class="btn btn-outline">
+                                    <i class="fab fa-github mr-2"></i>查看插件代码
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 其他项目卡片（占位用） -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="card p-6 group hover:border-primary-500 hover:border dark:hover:border-primary-400 transition-all">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">AI泉酱</h3>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm">已完成</span>
+                        </div>
+                        <p class="body-text mb-4">
+                            无需提示词的图片风格迁移工具，让AI自动识别并应用您喜欢的风格到任何图片中。
+                        </p>
+                        <div class="mt-auto pt-4">
+                            <a href="#" class="text-primary-600 dark:text-primary-400 hover:underline flex items-center">
+                                <span>敬请期待</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card p-6 group hover:border-primary-500 hover:border dark:hover:border-primary-400 transition-all">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">方案神器</h3>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm">已完成</span>
+                        </div>
+                        <p class="body-text mb-4">
+                            专为智能家居设计的方案生成工具，整合行业知识与最佳实践，快速生成动态的专业方案报价方案。
+                        </p>
+                        <div class="mt-auto pt-4">
+                            <a href="#" class="text-primary-600 dark:text-primary-400 hover:underline flex items-center">
+                                <span>了解更多</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 更多项目按钮 -->
+                <div class="mt-10 text-center">
+                    <a href="#" class="btn btn-outline inline-flex items-center">
+                        <span>查看更多项目（即将上线）</span>
+                        <i class="fas fa-chevron-down ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 支持我 -->
+        <section id="support" class="section">
+            <div class="container-custom">
+                <h2 class="heading-xl">支持我</h2>
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <div class="space-y-4">
+                        <p class="body-text">
+                            如果您觉得我的项目对您有所帮助，您可以通过以下方式支持我的工作：
+                        </p>
+                        <ul class="space-y-3 body-text">
+                            <li class="flex items-start">
+                                <i class="fas fa-heart text-red-500 mt-1 mr-3"></i>
+                                <span>通过赞赏码赞助，支持我继续开发更多有价值的项目</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fab fa-bilibili text-blue-500 mt-1 mr-3"></i>
+                                <span>如果您是B站大会员，可以通过每月的B币给我发电支持</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-yellow-500 mt-1 mr-3"></i>
+                                <span>在GitHub上为我的项目点亮星标，这对我很有鼓励</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-share-alt text-green-500 mt-1 mr-3"></i>
+                                <span>将我的项目分享给可能需要的朋友，帮助更多人</span>
+                            </li>
+                        </ul>
+                        <p class="body-text mt-6">
+                            您的每一份支持都会帮助我投入更多时间到开源项目中，创造更多有价值的工具。衷心感谢您的支持！
+                        </p>
+                        <div class="pt-4">
+                            <a href="https://space.bilibili.com/82205" target="_blank" class="btn btn-primary">
+                                <i class="fab fa-bilibili mr-2"></i>前往B站发电支持
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="card p-4 w-64">
+                            <img src="appreciate.jpg" alt="赞赏码" class="w-full rounded-lg">
+                            <p class="text-center mt-4 text-sm text-gray-600 dark:text-gray-400">扫描上方二维码赞赏支持</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-100 dark:bg-gray-800 py-10 mt-10">
+        <div class="container-custom">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Izumi.屈源</h3>
+                    <p class="text-gray-600 dark:text-gray-400">AI技术负责人 / 产品开发</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/OtokoNoIzumi" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                    <a href="https://space.bilibili.com/82205" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400">
+                        <i class="fab fa-bilibili text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 text-center text-gray-600 dark:text-gray-400">
+                <p>&copy; 2025 Izumi.屈源. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 深色模式切换
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // 滚动动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    observer.unobserve(entry.target);
+                }
             });
-        }
+        }, { threshold: 0.1 });
 
-        // 扩展loadSensitiveContent函数来加载教育信息
-        const originalLoadSensitiveContent = window.loadSensitiveContent;
-        window.loadSensitiveContent = function() {
-            fetch('sensitive_data.json')
-                .then(response => response.json())
-                .then(data => {
-                    // 调用原始函数处理基本信息
-                    if (typeof originalLoadSensitiveContent === 'function') {
-                        originalLoadSensitiveContent();
-                    }
-
-                    // 加载教育信息
-                    if (data.education) {
-                        loadEducationContent(data.education);
-                    }
-                })
-                .catch(error => {
-                    console.error('无法加载敏感数据:', error);
-                });
-        };
+        document.querySelectorAll('section, .card').forEach(section => {
+            section.classList.remove('animate-fade-in');
+            observer.observe(section);
+        });
     </script>
 </body>
 </html>
