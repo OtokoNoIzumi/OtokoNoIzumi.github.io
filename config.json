@@ -1,0 +1,20 @@
+{
+    "version": "1.0.0",
+    "api": {
+        "adSkipServerBaseURL": "https://izumihostpab.life:3000"
+    },
+    "projects": {
+        "adSkip": {
+            "chromeStoreURL": "https://chromewebstore.google.com/detail/dicbndgaokkkafcehlfmkllbipeekfhi",
+            "githubURL": "https://github.com/OtokoNoIzumi/adskip"
+        }
+    },
+    "social": {
+        "github": "https://github.com/OtokoNoIzumi",
+        "bilibili": "https://space.bilibili.com/82205"
+    },
+    "contact": {
+        "email": "izumi.kagurazaka@gmail.com",
+        "wechat": "fishream"
+    }
+}
