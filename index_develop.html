@@ -137,6 +137,10 @@
                             <a href="https://space.bilibili.com/82205" target="_blank" class="btn btn-outline">
                                 <i class="fab fa-bilibili mr-2"></i>Bilibili
                             </a>
+                            <!-- 扫码功能按钮 -->
+                            <button id="scanButton" onclick="startScan()" class="btn btn-outline">
+                                <i class="fas fa-qrcode mr-2"></i>扫码
+                            </button>
                         </div>
                     </div>
                     <div class="flex justify-center">
@@ -571,6 +575,31 @@
             checkAndShowMobileGuide();
         });
 
+        // 调用飞书JS-SDK的扫码功能
+        function startScan() {
+            tt.scanCode({
+                success(res) {
+                    // 这里获取扫码结果
+                    console.log('扫码结果：', res.result);
+                    showCopySuccess('扫码成功：' + res.result);
+                    // 可以将结果发送给机器人处理
+                    sendToBot(res.result);
+                },
+                fail(err) {
+                    console.error('扫码失败：', err);
+                    showCopyError('扫码失败，请重试');
+                }
+            });
+        }
+
+        // 将结果发送给机器人
+        function sendToBot(qrContent) {
+            // 调用发送消息API将结果发给机器人
+            // 需要先获取access_token等凭证
+            // 详见发送消息接口文档
+            console.log('准备发送给机器人：', qrContent);
+            // 这里可以添加具体的发送逻辑
+        }
     </script>
 </body>
 </html>
