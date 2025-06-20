@@ -573,28 +573,10 @@
         // 页面加载完成后检查是否为移动设备
         document.addEventListener('DOMContentLoaded', function() {
             checkAndShowMobileGuide();
-            checkScanCodeSupport();
         });
-
-        // 检查扫码功能支持
-        function checkScanCodeSupport() {
-            // 检查是否在支持扫码的环境中（飞书、抖音等）
-            if (typeof tt !== 'undefined' && tt.scanCode) {
-                // 显示扫码按钮
-                const scanButton = document.getElementById('scanButton');
-                if (scanButton) {
-                    scanButton.style.display = 'inline-flex';
-                }
-            }
-        }
 
         // 调用飞书JS-SDK的扫码功能
         function startScan() {
-            if (typeof tt === 'undefined' || !tt.scanCode) {
-                showCopyError('扫码功能仅在飞书或抖音环境中可用');
-                return;
-            }
-
             tt.scanCode({
                 success(res) {
                     // 这里获取扫码结果
