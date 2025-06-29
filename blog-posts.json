@@ -1,0 +1,27 @@
+{
+  "posts": [
+    {
+      "title": "随机抽个汤方",
+      "date": "2025-06-21",
+      "summary": "看看每个汤方真正的隐藏功效是啥",
+      "url": "Diary/soup",
+      "tags": ["HTML", "吐槽养生"],
+      "featured": false
+    },
+    {
+      "title": "导航应用与城市道路安全分析",
+      "date": "2025-05-23",
+      "summary": "让AI调研了一下我关心的导航对交通安全的作用，通过支持而非管控推动组织变革",
+      "url": "Diary/trafic",
+      "tags": ["AI Research", "管理理念", "播客"]
+    },
+    {
+      "title": "AI辅助开发网页实操课",
+      "date": "2025-07-14",
+      "summary": "跟着教程制作一份属于自己的网站和海报",
+      "url": "ai_learning",
+      "tags": ["HTML", "AI", "教程"],
+      "featured": true
+    }
+  ]
+}

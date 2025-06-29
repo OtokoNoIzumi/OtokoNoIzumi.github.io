@@ -99,8 +99,9 @@
                     <span class="text-xl font-bold text-primary-600 dark:text-primary-400">Izumi.屈源</span>
                 </div>
                 <div class="flex items-center space-x-2 md:space-x-4">
-                    <a href="#projects" class="nav-link">项目作品</a>
                     <a href="#about" class="nav-link">关于我</a>
+                    <a href="#blog" class="nav-link">近期文章</a>
+                    <a href="#projects" class="nav-link">项目作品</a>
                     <a href="#support" class="nav-link">支持我</a>
                     <button id="theme-toggle" class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
                         <i class="fas fa-moon dark:hidden"></i>
@@ -209,8 +210,40 @@
             </div>
         </section>
 
+        <!-- 近期文章 -->
+        <section id="blog" class="section bg-gray-100 dark:bg-gray-800/50">
+            <div class="container-custom">
+                <h2 class="heading-xl">近期文章</h2>
+                <div id="blog-posts-container" class="space-y-6">
+                    <!-- 文章列表将通过JavaScript动态加载 -->
+                    <div class="text-center py-8">
+                        <i class="fas fa-spinner fa-spin text-2xl text-primary-500 mb-4"></i>
+                        <p class="body-text">加载文章中...</p>
+                    </div>
+                </div>
+                <div class="mt-8 text-center space-y-4">
+                    <a href="#" class="btn btn-outline inline-flex items-center" onclick="loadMorePosts()">
+                        <span>查看更多文章</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <!-- 本地测试功能 -->
+                    <div id="local-test-controls" class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4" style="display: none;">
+                        <h4 class="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">
+                            <i class="fas fa-flask mr-2"></i>本地测试模式
+                        </h4>
+                        <p class="text-sm text-yellow-700 dark:text-yellow-300 mb-3">
+                            当前使用嵌入数据。要测试JSON文件动态加载，请使用本地服务器。
+                        </p>
+                        <button onclick="window.open('https://github.com/OtokoNoIzumi/OtokoNoIzumi.github.io#%EF%B8%8F-本地开发', '_blank')" class="btn btn-outline text-sm">
+                            <i class="fas fa-book mr-2"></i>查看开发文档
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- 项目展示 -->
-        <section id="projects" class="section bg-gray-100 dark:bg-gray-800/50">
+        <section id="projects" class="section">
             <div class="container-custom">
                 <h2 class="heading-xl">项目作品</h2>
 
@@ -373,7 +406,7 @@
         </section>
 
         <!-- 支持我 -->
-        <section id="support" class="section">
+        <section id="support" class="section bg-gray-100 dark:bg-gray-800/50">
             <div class="container-custom">
                 <h2 class="heading-xl">支持我</h2>
                 <div class="grid md:grid-cols-2 gap-10 items-center">
@@ -402,7 +435,7 @@
                         <p class="body-text mt-6">
                             您的每一份支持都会帮助我投入更多时间到开源项目中，创造更多有价值的工具。衷心感谢您的支持！
                         </p>
-                        <div class="pt-4">
+                        <div class="pt-4 text-center md:text-left">
                             <a href="https://space.bilibili.com/82205" target="_blank" class="btn btn-primary">
                                 <i class="fab fa-bilibili mr-2"></i>前往B站发电支持
                             </a>
@@ -420,7 +453,7 @@
     </main>
 
     <!-- 页脚 -->
-    <footer class="bg-gray-100 dark:bg-gray-800 py-10 mt-10">
+    <footer class="bg-gray-100 dark:bg-gray-800 py-10">
         <div class="container-custom">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-6 md:mb-0">
@@ -446,6 +479,38 @@
     <script>
                 // 全局变量存储当前的来源
         let currentSource = 'homepage';
+
+        // 博客文章相关变量
+        let blogPosts = [];
+        let displayedPostsCount = 3; // 初始显示3篇文章
+
+        // 临时嵌入的博客数据（本地测试用）
+        const embeddedBlogData = {
+            "posts": [
+                {
+                    "title": "随机抽个汤方",
+                    "date": "2025-06-21",
+                    "summary": "看看每个汤方真正的隐藏功效是啥",
+                    "url": "Diary/soup",
+                    "tags": ["HTML", "吐槽养生"],
+                    "featured": true
+                },
+                {
+                    "title": "导航应用与城市道路安全分析",
+                    "date": "2025-05-23",
+                    "summary": "让AI调研了一下我关心的导航对交通安全的作用，通过支持而非管控推动组织变革",
+                    "url": "Diary/trafic",
+                    "tags": ["AI Research", "管理理念", "播客"]
+                },
+                {
+                    "title": "AI辅助开发网页实操课",
+                    "date": "2025-06-14",
+                    "summary": "跟着教程制作一份属于自己的网站和海报",
+                    "url": "ai_learning",
+                    "tags": ["HTML", "AI", "教程"]
+                }
+            ]
+        };
 
         // URL参数解析和来源追踪
         function parseAndUpdateSource() {
@@ -607,10 +672,156 @@
             }, 3000);
         }
 
+        // 加载博客文章数据
+        async function loadBlogPosts() {
+            try {
+                // 检测是否在本地file://协议下运行
+                if (window.location.protocol === 'file:') {
+                    // console.log('检测到本地文件协议，使用嵌入数据'); // 生产环境可注释
+                    blogPosts = embeddedBlogData.posts || [];
+                    renderBlogPosts();
+                    showLocalTestControls();
+                    return;
+                }
+
+                // 在HTTP/HTTPS协议下使用fetch加载JSON文件
+                const response = await fetch('./blog-posts.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                blogPosts = data.posts || [];
+                renderBlogPosts();
+            } catch (error) {
+                // console.error('加载文章失败:', error); // 生产环境可注释
+                // 如果fetch失败，尝试使用嵌入数据作为备用方案
+                // console.log('尝试使用嵌入数据作为备用方案'); // 生产环境可注释
+                blogPosts = embeddedBlogData.posts || [];
+                renderBlogPosts();
+            }
+        }
+
+        // 渲染博客文章列表
+        function renderBlogPosts() {
+            const container = document.getElementById('blog-posts-container');
+            if (!container) return;
+
+            if (blogPosts.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8">
+                        <i class="fas fa-file-alt text-4xl text-gray-400 mb-4"></i>
+                        <p class="body-text">暂无文章</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // 保持JSON文件中的原始顺序，不进行自动排序
+            const postsToShow = blogPosts.slice(0, displayedPostsCount);
+
+            container.innerHTML = postsToShow.map(post => `
+                <article class="card p-6 group hover:border-primary-500 hover:border dark:hover:border-primary-400 transition-all ${post.featured ? 'border-l-4 border-l-primary-500 dark:border-l-primary-400 bg-gradient-to-r from-primary-50/50 to-transparent dark:from-primary-900/10 dark:to-transparent' : ''}">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors mb-2 md:mb-0 flex items-center">
+                            <a href="${getPostUrl(post.url)}" class="hover:underline">${post.title}</a>
+                            ${post.featured ? '<i class="fas fa-star text-yellow-500 ml-2 text-sm" title="精选文章"></i>' : ''}
+                        </h3>
+                        <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                            <i class="fas fa-calendar mr-2"></i>
+                            <time datetime="${post.date}">${formatDate(post.date)}</time>
+                        </div>
+                    </div>
+                    <p class="body-text mb-4">${post.summary}</p>
+                    <div class="flex flex-wrap items-center justify-between">
+                        <div class="flex flex-wrap gap-2 mb-3 md:mb-0">
+                            ${post.tags.map(tag => `
+                                <span class="px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded text-sm">
+                                    ${tag}
+                                </span>
+                            `).join('')}
+                        </div>
+                        <a href="${getPostUrl(post.url)}" class="text-primary-600 dark:text-primary-400 hover:underline flex items-center">
+                            <span>阅读全文</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </article>
+            `).join('');
+
+            // 更新"查看更多"按钮状态
+            updateMoreButton();
+        }
+
+        // 处理文章URL（支持相对路径和绝对路径）
+        function getPostUrl(url) {
+            if (!url) return '#';
+
+            // 检查是否为绝对路径（http://或https://开头）
+            if (url.startsWith('http://') || url.startsWith('https://')) {
+                return url;
+            }
+
+            // 如果是相对路径，直接返回（浏览器会自动处理）
+            return url;
+        }
+
+        // 格式化日期
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('zh-CN', options);
+        }
+
+        // 显示博客加载错误
+        function showBlogError() {
+            const container = document.getElementById('blog-posts-container');
+            if (container) {
+                container.innerHTML = `
+                    <div class="text-center py-8">
+                        <i class="fas fa-exclamation-triangle text-4xl text-red-500 mb-4"></i>
+                        <p class="body-text text-red-600 dark:text-red-400">文章加载失败，请稍后重试</p>
+                        <button onclick="loadBlogPosts()" class="btn btn-outline mt-4">
+                            <i class="fas fa-redo mr-2"></i>重新加载
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // 加载更多文章
+        function loadMorePosts() {
+            displayedPostsCount += 3;
+            renderBlogPosts();
+        }
+
+        // 更新"查看更多"按钮状态
+        function updateMoreButton() {
+            const moreButton = document.querySelector('a[onclick="loadMorePosts()"]');
+            if (moreButton) {
+                if (displayedPostsCount >= blogPosts.length) {
+                    moreButton.style.display = 'none';
+                } else {
+                    moreButton.style.display = 'inline-flex';
+                }
+            }
+        }
+
+                // 显示本地测试控制面板（本地文件协议时自动显示）
+        function showLocalTestControls() {
+            const controls = document.getElementById('local-test-controls');
+            if (controls) {
+                // 在本地文件协议下自动显示，方便开发者了解
+                controls.style.display = 'block';
+            }
+        }
+
+
+
         // 页面加载完成后检查是否为移动设备和解析URL参数
         document.addEventListener('DOMContentLoaded', function() {
             checkAndShowMobileGuide();
             parseAndUpdateSource(); // 解析URL参数并更新Chrome插件链接
+            loadBlogPosts(); // 加载博客文章
         });
 
     </script>
