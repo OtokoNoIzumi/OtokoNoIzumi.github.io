@@ -10,11 +10,40 @@
         }
     },
     "social": {
-        "github": "https://github.com/OtokoNoIzumi",
+        "github": "https://otokonoizumi.github.io",
         "bilibili": "https://space.bilibili.com/82205"
     },
     "contact": {
-        "email": "izumi.kagurazaka@gmail.com",
-        "wechat": "fishream"
+        "email": "izumi.kagurazaka@gmail.com"
+    },
+    "version_hint": {
+        "1.2.7": [
+            "关注制作者可以获得让每天可用次数加1。",
+            "没有字幕的视频也可以手动添加广告时间。"
+        ],
+        "1.2.8": [
+            "关注制作者可以获得让每天可用次数加1。"
+        ],
+        "1.2.9": [
+            "关注制作者可以获得让每天可用次数加1。"
+        ],
+        "1.2.10": [
+            "关注制作者可以获得让每天可用次数加1。"
+        ],
+        "1.2.11": [
+            "关注制作者可以获得让每天可用次数加1。"
+        ],
+        "1.2.12": [
+            "关注制作者可以获得让每天可用次数加1。"
+        ],
+        "1.3.0": [
+            "关注制作者可以获得让每天可用次数加1。"
+        ],
+        "default": [
+            "关注制作者可以获得让每天可用次数加1。"
+        ],
+        "degrade": [
+            "您的版本过旧，建议升级以获得更好的体验。关注制作者可以获得让每天可用次数加1。"
+        ]
     }
 }
