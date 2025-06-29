@@ -444,6 +444,45 @@
 
     <!-- JavaScript -->
     <script>
+                // 全局变量存储当前的来源
+        let currentSource = 'homepage';
+
+        // URL参数解析和来源追踪
+        function parseAndUpdateSource() {
+            // 定义允许的source值白名单
+            const allowedSources = ['weibo', 'zhihu', 'github', 'bilibili', 'wechat', 'qq', 'douyin', 'xiaohongshu', 'juejin', 'csdn', 'v2ex', 'twitter', 'facebook', 'linkedin', 'homepage'];
+
+            // 获取URL参数
+            const urlParams = new URLSearchParams(window.location.search);
+            const sourceParam = urlParams.get('source');
+
+            // 校验source参数
+            let validatedSource = 'homepage'; // 默认值
+            if (sourceParam && typeof sourceParam === 'string' && allowedSources.includes(sourceParam.toLowerCase())) {
+                validatedSource = sourceParam.toLowerCase();
+            }
+
+            // 存储到全局变量
+            currentSource = validatedSource;
+
+            // 更新Chrome插件链接的utm_source参数
+            const chromeLink = document.querySelector('a[href*="chromewebstore.google.com"]');
+            if (chromeLink) {
+                const originalHref = chromeLink.getAttribute('href');
+                // 替换或添加utm_source参数
+                const url = new URL(originalHref);
+                url.searchParams.set('utm_source', validatedSource);
+                chromeLink.setAttribute('href', url.toString());
+            }
+
+            // 如果需要，可以在控制台输出调试信息
+            if (sourceParam && sourceParam !== validatedSource) {
+                console.log(`Source参数 "${sourceParam}" 未通过校验，使用默认值 "${validatedSource}"`);
+            } else if (validatedSource !== 'homepage') {
+                console.log(`检测到有效来源: ${validatedSource}`);
+            }
+        }
+
         // 深色模式切换
         document.getElementById('theme-toggle').addEventListener('click', function() {
             if (document.documentElement.classList.contains('dark')) {
@@ -505,7 +544,9 @@
 
         // 复制Chrome插件下载链接
         function copyPluginURL() {
-            const pluginURL = 'https://chromewebstore.google.com/detail/bilibili-%E5%88%87%E7%89%87%E5%B9%BF%E5%91%8A%E4%B9%8B%E5%8F%8B/dicbndgaokkkafcehlfmkllbipeekfhi';
+            // 基础插件URL，添加动态的utm_source参数
+            const basePluginURL = 'https://chromewebstore.google.com/detail/dicbndgaokkkafcehlfmkllbipeekfhi';
+            const pluginURL = `${basePluginURL}?utm_source=${currentSource}`;
 
             if (navigator.clipboard && window.isSecureContext) {
                 // 现代浏览器的 clipboard API
@@ -566,9 +607,10 @@
             }, 3000);
         }
 
-        // 页面加载完成后检查是否为移动设备
+        // 页面加载完成后检查是否为移动设备和解析URL参数
         document.addEventListener('DOMContentLoaded', function() {
             checkAndShowMobileGuide();
+            parseAndUpdateSource(); // 解析URL参数并更新Chrome插件链接
         });
 
     </script>
