@@ -82,7 +82,7 @@
                         "description_offset": 170,
                         "conversion_unit_minutes": 20,
                         "conversion_template": "✨ 相当于追了{count}集新番",
-                        "video_count_template": "🎌 沉浸了 {count} 个无干扰视频"
+                        "video_count_template": "🎌 沉浸享受了 {count} 个视频"
                     },
                     {
                         "main_title": "午后时光，惬意舒适☀️",
@@ -118,7 +118,7 @@
                         "description_offset": 170,
                         "conversion_unit_minutes": 90,
                         "conversion_template": "✨ 相当于看了{count}部电影",
-                        "video_count_template": "🎬 深度沉浸了 {count} 个视频"
+                        "video_count_template": "🎬 深度沉浸享受了 {count} 个视频"
                     },
                     {
                         "main_title": "火锅聚会的温暖时光🍲",
@@ -128,7 +128,7 @@
                         "description_offset": 170,
                         "conversion_unit_minutes": 90,
                         "conversion_template": "✨ 相当于和朋友吃了{count}顿火锅",
-                        "video_count_template": "🍲 温馨观赏了 {count} 个视频"
+                        "video_count_template": "🍲 开心地观赏了 {count} 个视频"
                     },
                     {
                         "main_title": "身心和谐的瑜伽时间🧘‍♀️",
@@ -138,7 +138,7 @@
                         "description_offset": 170,
                         "conversion_unit_minutes": 90,
                         "conversion_template": "✨ 相当于做了{count}套完整瑜伽",
-                        "video_count_template": "🧘‍♀️ 平静享受了 {count} 个视频"
+                        "video_count_template": "🧘‍♀️ 身心舒畅地享受了 {count} 个视频"
                     }
                 ]
             },

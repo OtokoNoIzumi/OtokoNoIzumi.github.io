@@ -1,0 +1,120 @@
+{
+  "metadata": {
+    "lastUpdated": "2025-01-16T12:00:00Z",
+    "currentWeek": "2025-06-30",
+    "totalWeeks": 1,
+    "description": "B站广告跳过插件数据分析"
+  },
+  "overview": {
+    "totalAnalyzedVideos": 7206,
+    "totalAdDuration": 77529,
+    "totalVideoDuration": 8193118,
+    "totalAdVideos": 1040,
+    "adTimeRatio": 0.009462697839821177,
+    "adVideoRatio": 0.1443241742991951,
+    "avgAdDurationPerVideo": 74.54711538461538
+  },
+  "operations": {
+    "chromeStore": {
+      "impressions": 2789,
+      "clicks": 60,
+      "clickRate": 0.022
+    },
+    "distribution": {
+      "totalClicks": 244,
+      "totalInstalls": 122,
+      "totalUninstalls": 19,
+      "totalDisabled": 13,
+      "installRate": 0.50,
+      "uninstallRate": 0.156,
+      "disableRate": 0.107
+    }
+  },
+  "weeks": [
+    {
+      "weekStart": "2025-06-30",
+      "weekEnd": "2025-07-06",
+      "users": {
+        "totalUsers": 76,
+        "totalChurnedUsers": 31,
+        "weeklyNewUsers": 8,
+        "weeklyChurnedUsers": 6,
+        "lowActiveUsers": 12,
+        "activeUsers": 33,
+        "freeUsers": 71,
+        "paidUsers": 4,
+        "invitedUsers": 1
+      },
+      "requests": {
+        "weeklyTotalRequests": 82,
+        "weeklyCacheHits": 8,
+        "weeklyCacheUtilization": 0.0975609756097561,
+        "weeklyTotalRejections": 15,
+        "weeklyUniqueUsers": 14,
+        "weeklyUniqueVideos": 81
+      },
+      "analysis": {
+        "weeklyVideosAnalyzed": 1442,
+        "weeklyAdDuration": 9316,
+        "weeklyVideoDuration": 1952242,
+        "weeklyAdVideos": 164,
+        "weeklyAdTimeRatio": 0.0047719493792265505,
+        "weeklyAdVideoRatio": 0.11373092926490985,
+        "weeklyAvgAdDuration": 56.80487804878049
+      }
+    }
+  ],
+  "sources": [
+    {
+      "name": "total",
+      "displayName": "用户使用",
+      "videos": 7206,
+      "adDuration": 77529,
+      "avgDuration": 10.75,
+      "adVideos": 1040,
+      "adRatio": 0.1443241742991951,
+      "avgAdDuration": 74.55,
+      "description": "用户实际使用插件时的数据汇总"
+    },
+    {
+      "name": "favorites",
+      "displayName": "我的收藏夹",
+      "videos": 241,
+      "adDuration": 1317,
+      "avgDuration": 5.46,
+      "adVideos": 26,
+      "adRatio": 0.108,
+      "avgAdDuration": 50.65,
+      "description": "用户收藏夹内视频的广告分析"
+    },
+    {
+      "name": "dynamic",
+      "displayName": "我的关注动态",
+      "videos": 1150,
+      "adDuration": 6875,
+      "avgDuration": 5.98,
+      "adVideos": 51,
+      "adRatio": 0.044,
+      "avgAdDuration": 134.80,
+      "description": "关注用户动态中视频的广告分析"
+    },
+    {
+      "name": "homepage",
+      "displayName": "我的首页推送",
+      "videos": 813,
+      "adDuration": 12483,
+      "avgDuration": 15.35,
+      "adVideos": 165,
+      "adRatio": 0.203,
+      "avgAdDuration": 75.65,
+      "description": "首页推荐视频的广告分析"
+    }
+  ],
+  "insights": {
+    "topAdSource": "homepage",
+    "cleanestSource": "dynamic",
+    "averageAdDuration": 74.55,
+    "totalTimeSaved": 21.54,
+    "userSatisfaction": 0.85
+  }
+}
