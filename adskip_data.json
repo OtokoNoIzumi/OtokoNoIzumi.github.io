@@ -1,18 +1,18 @@
 {
   "metadata": {
-    "lastUpdated": "2025-07-06 14:55:00",
-    "currentWeek": "2025-06-30",
-    "totalWeeks": 1,
+    "lastUpdated": "2025-07-13 14:55:00",
+    "currentWeek": "2025-07-07",
+    "totalWeeks": 2,
     "description": "B站广告跳过插件数据分析"
   },
   "overview": {
-    "totalAnalyzedVideos": 7206,
-    "totalAdDuration": 77529,
-    "totalVideoDuration": 8193118,
-    "totalAdVideos": 1040,
-    "adTimeRatio": 0.009462697839821177,
-    "adVideoRatio": 0.1443241742991951,
-    "avgAdDurationPerVideo": 74.54711538461538
+    "totalAnalyzedVideos": 9274,
+    "totalAdDuration": 93994,
+    "totalVideoDuration": 11332993,
+    "totalAdVideos": 1271,
+    "adTimeRatio": 0.008293837294349338,
+    "adVideoRatio": 0.13704981669182661,
+    "avgAdDurationPerVideo": 73.95279307631786
   },
   "operations": {
     "chromeStore": {
@@ -62,18 +62,50 @@
         "weeklyAdVideoRatio": 0.11373092926490985,
         "weeklyAvgAdDuration": 56.80487804878049
       }
+    },
+    {
+      "weekStart": "2025-07-07",
+      "weekEnd": "2025-07-13",
+      "users": {
+        "totalUsers": 95,
+        "totalChurnedUsers": 43,
+        "weeklyNewUsers": 18,
+        "weeklyChurnedUsers": 5,
+        "lowActiveUsers": 10,
+        "activeUsers": 42,
+        "freeUsers": 90,
+        "paidUsers": 4,
+        "invitedUsers": 1
+      },
+      "requests": {
+        "weeklyTotalRequests": 1983,
+        "weeklyCacheHits": 147,
+        "weeklyCacheUtilization": 0.07413010590015129,
+        "weeklyTotalRejections": 471,
+        "weeklyUniqueUsers": 48,
+        "weeklyUniqueVideos": 1937
+      },
+      "analysis": {
+        "weeklyVideosAnalyzed": 1836,
+        "weeklyAdDuration": 14669,
+        "weeklyVideoDuration": 2982451,
+        "weeklyAdVideos": 202,
+        "weeklyAdTimeRatio": 0.004918437888837068,
+        "weeklyAdVideoRatio": 0.11002178649237472,
+        "weeklyAvgAdDuration": 72.61881188118812
+      }
     }
   ],
   "sources": [
     {
       "name": "total",
       "displayName": "用户使用",
-      "videos": 7206,
-      "adDuration": 77529,
-      "avgDuration": 10.75,
-      "adVideos": 1040,
-      "adRatio": 0.1443241742991951,
-      "avgAdDuration": 74.55,
+      "videos": 9274,
+      "adDuration": 93994,
+      "avgDuration": 10.14,
+      "adVideos": 1271,
+      "adRatio": 0.13704981669182661,
+      "avgAdDuration": 73.95,
       "description": "用户实际使用插件时的数据汇总"
     },
     {
@@ -113,8 +145,8 @@
   "insights": {
     "topAdSource": "homepage",
     "cleanestSource": "dynamic",
-    "averageAdDuration": 74.55,
-    "totalTimeSaved": 21.54,
+    "averageAdDuration": 73.95,
+    "totalTimeSaved": 26.11,
     "userSatisfaction": 0.85
   }
 }
