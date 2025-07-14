@@ -16,18 +16,18 @@
   },
   "operations": {
     "chromeStore": {
-      "impressions": 2789,
-      "clicks": 60,
+      "impressions": 2972,
+      "clicks": 66,
       "clickRate": 0.022
     },
     "distribution": {
-      "totalClicks": 244,
-      "totalInstalls": 122,
-      "totalUninstalls": 19,
-      "totalDisabled": 13,
-      "installRate": 0.50,
-      "uninstallRate": 0.156,
-      "disableRate": 0.107
+      "totalClicks": 323,
+      "totalInstalls": 163,
+      "totalUninstalls": 24,
+      "totalDisabled": 17,
+      "installRate": 0.504,
+      "uninstallRate": 0.147,
+      "disableRate": 0.104
     }
   },
   "weeks": [

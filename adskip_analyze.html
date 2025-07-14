@@ -554,7 +554,7 @@
         <script>
         // 全局数据存储
         let globalData = null;
-        let currentWeekIndex = 0;
+        let currentWeekIndex = 0; // 将在初始化时设置为最新一周
 
         // 加载数据配置文件
         async function loadData() {
@@ -612,6 +612,38 @@
                         users: { totalUsers: 76, totalChurnedUsers: 31, weeklyNewUsers: 8, weeklyChurnedUsers: 6, lowActiveUsers: 12, activeUsers: 33, freeUsers: 71, paidUsers: 4, invitedUsers: 1 },
                         requests: { weeklyTotalRequests: 82, weeklyCacheHits: 8, weeklyCacheUtilization: 0.0975609756097561, weeklyTotalRejections: 15, weeklyUniqueUsers: 14, weeklyUniqueVideos: 81 },
                         analysis: { weeklyVideosAnalyzed: 1442, weeklyAdDuration: 9316, weeklyVideoDuration: 1952242, weeklyAdVideos: 164, weeklyAdTimeRatio: 0.0047719493792265505, weeklyAdVideoRatio: 0.11373092926490985, weeklyAvgAdDuration: 56.80487804878049 }
+                    },
+                    {
+                        weekStart: "2025-07-07",
+                        weekEnd: "2025-07-13",
+                        users: {
+                            totalUsers: 95,
+                            totalChurnedUsers: 43,
+                            weeklyNewUsers: 18,
+                            weeklyChurnedUsers: 5,
+                            lowActiveUsers: 10,
+                            activeUsers: 42,
+                            freeUsers: 90,
+                            paidUsers: 4,
+                            invitedUsers: 1
+                        },
+                        requests: {
+                            weeklyTotalRequests: 1983,
+                            weeklyCacheHits: 147,
+                            weeklyCacheUtilization: 0.07413010590015129,
+                            weeklyTotalRejections: 471,
+                            weeklyUniqueUsers: 48,
+                            weeklyUniqueVideos: 1937
+                        },
+                        analysis: {
+                            weeklyVideosAnalyzed: 1836,
+                            weeklyAdDuration: 14669,
+                            weeklyVideoDuration: 2982451,
+                            weeklyAdVideos: 202,
+                            weeklyAdTimeRatio: 0.004918437888837068,
+                            weeklyAdVideoRatio: 0.11002178649237472,
+                            weeklyAvgAdDuration: 72.61881188118812
+                        }
                     }
                 ],
                 sources: [
@@ -626,6 +658,9 @@
 
         // 初始化仪表板
         function initializeDashboard() {
+            // 设置当前周期为最新的一周
+            currentWeekIndex = globalData.weeks.length - 1;
+
             updateLastUpdateTime();
             updateOverviewMetrics();
             generateWeekTimeline();
