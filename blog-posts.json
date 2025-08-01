@@ -1,12 +1,20 @@
 {
   "posts": [
     {
+      "title": "酒店预订价格策略设计方案",
+      "date": "2025-07-26",
+      "summary": "酒店预订价格策略设计方案",
+      "url": "Diary/hotel_pricing_strategy_visual",
+      "tags": ["流程再造", "管理实战"],
+      "featured": false
+    },
+    {
       "title": "Cursor 1.2版本单次修改成本实测",
       "date": "2025-07-10",
       "summary": "一次提交竟然消耗300W token……",
       "url": "https://ddsz-peng13.feishu.cn/docx/QyDUdRcYLomQzMxsGCLcOD9knbg",
       "tags": ["Cursor", "AI"],
-      "featured": true
+      "featured": false
     },
     {
       "title": "小玩具网站-随机抽个熬汤汤方",
@@ -15,13 +23,6 @@
       "url": "Diary/soup",
       "tags": ["HTML", "吐槽养生"],
       "featured": false
-    },
-    {
-      "title": "导航应用与城市道路安全分析",
-      "date": "2025-05-23",
-      "summary": "让AI调研了一下我关心的导航对交通安全的作用，通过支持而非管控推动组织变革",
-      "url": "Diary/trafic",
-      "tags": ["AI Research", "管理理念", "播客"]
     }
   ]
 }
