@@ -968,7 +968,7 @@
                     textStyle: { color: '#fff' }
                 },
                 legend: {
-                    data: ['活跃用户', '分析视频', '拦截广告'],
+                    data: ['活跃用户', '拦截广告', '分析视频'],
                     textStyle: { color: '#fff' },
                     top: 10
                 },
@@ -988,7 +988,7 @@
                 yAxis: [
                     {
                         type: 'value',
-                        name: '用户/视频',
+                        name: '用户数/广告数',
                         nameTextStyle: { color: '#fff' },
                         axisLabel: { color: '#fff' },
                         axisLine: { lineStyle: { color: '#555' } },
@@ -996,7 +996,7 @@
                     },
                     {
                         type: 'value',
-                        name: '广告数',
+                        name: '分析视频数',
                         nameTextStyle: { color: '#fff' },
                         axisLabel: { color: '#fff' },
                         axisLine: { lineStyle: { color: '#555' } },
@@ -1015,22 +1015,22 @@
                         symbolSize: 6
                     },
                     {
-                        name: '分析视频',
+                        name: '拦截广告',
                         type: 'line',
                         yAxisIndex: 0,
-                        data: globalData.weeks.map(week => Math.round(week.analysis.weeklyVideosAnalyzed / 10)), // 缩放显示
-                        lineStyle: { color: '#A541FF', width: 3 },
-                        itemStyle: { color: '#A541FF' },
+                        data: globalData.weeks.map(week => week.analysis.weeklyAdVideos),
+                        lineStyle: { color: '#FF54A2', width: 3 },
+                        itemStyle: { color: '#FF54A2' },
                         symbol: 'circle',
                         symbolSize: 6
                     },
                     {
-                        name: '拦截广告',
+                        name: '分析视频',
                         type: 'line',
                         yAxisIndex: 1,
-                        data: globalData.weeks.map(week => week.analysis.weeklyAdVideos),
-                        lineStyle: { color: '#FF54A2', width: 3 },
-                        itemStyle: { color: '#FF54A2' },
+                        data: globalData.weeks.map(week => week.analysis.weeklyVideosAnalyzed), // 显示真实数值
+                        lineStyle: { color: '#A541FF', width: 3 },
+                        itemStyle: { color: '#A541FF' },
                         symbol: 'circle',
                         symbolSize: 6
                     }
