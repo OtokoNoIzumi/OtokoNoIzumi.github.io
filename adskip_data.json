@@ -1,18 +1,18 @@
 {
   "metadata": {
-    "lastUpdated": "2025-08-01 12:00:00",
-    "currentWeek": "2025-07-21",
-    "totalWeeks": 4,
+    "lastUpdated": "2025-08-04 22:00:00",
+    "currentWeek": "2025-07-28",
+    "totalWeeks": 5,
     "description": "B站广告跳过插件数据分析"
   },
   "overview": {
-    "totalAnalyzedVideos": 13316,
-    "totalAdDuration": 122314,
-    "totalVideoDuration": 18065429,
-    "totalAdVideos": 1748,
-    "adTimeRatio": 0.006770611425834393,
-    "adVideoRatio": 0.1312706518474016,
-    "avgAdDurationPerVideo": 69.97368421052632
+    "totalAnalyzedVideos": 15131,
+    "totalAdDuration": 138823,
+    "totalVideoDuration": 21080423,
+    "totalAdVideos": 1958,
+    "adTimeRatio": 0.006585399163954158,
+    "adVideoRatio": 0.1294032119489789,
+    "avgAdDurationPerVideo": 70.90040858018386
   },
   "operations": {
     "chromeStore": {
@@ -157,6 +157,38 @@
         "weeklyAdTimeRatio": 0.0034034785049867292,
         "weeklyAdVideoRatio": 0.11818181818181818,
         "weeklyAvgAdDuration": 59.166666666666664
+      }
+    },
+    {
+      "weekStart": "2025-07-28",
+      "weekEnd": "2025-08-03",
+      "users": {
+        "totalUsers": 113,
+        "totalChurnedUsers": 67,
+        "weeklyNewUsers": 4,
+        "weeklyChurnedUsers": 9,
+        "lowActiveUsers": 5,
+        "activeUsers": 41,
+        "freeUsers": 107,
+        "paidUsers": 5,
+        "invitedUsers": 1
+      },
+      "requests": {
+        "weeklyTotalRequests": 2013,
+        "weeklyCacheHits": 199,
+        "weeklyCacheUtilization": 0.09885742672627919,
+        "weeklyTotalRejections": 745,
+        "weeklyUniqueUsers": 43,
+        "weeklyUniqueVideos": 1937
+      },
+      "analysis": {
+        "weeklyVideosAnalyzed": 1814,
+        "weeklyAdDuration": 16741,
+        "weeklyVideoDuration": 3021269,
+        "weeklyAdVideos": 212,
+        "weeklyAdTimeRatio": 0.005541049141933406,
+        "weeklyAdVideoRatio": 0.11686879823594266,
+        "weeklyAvgAdDuration": 78.96698113207547
       }
     }
   ],
