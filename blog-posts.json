@@ -1,20 +1,20 @@
 {
   "posts": [
     {
+      "title": "Nano Banana 独家使用心得",
+      "date": "2025-08-28",
+      "summary": "介绍全网首个破千次生图发现的3个秘密",
+      "url": "Diary/nano_secret_v4",
+      "tags": ["AICG", "AI图片", "浏览器插件", "meta prompt"],
+      "featured": false
+    },
+    {
       "title": "酒店预订价格策略设计方案",
       "date": "2025-07-26",
       "summary": "酒店预订价格策略设计方案",
       "url": "Diary/hotel_pricing_strategy_visual",
       "tags": ["流程再造", "管理实战"],
-      "featured": false
-    },
-    {
-      "title": "Cursor 1.2版本单次修改成本实测",
-      "date": "2025-07-10",
-      "summary": "一次提交竟然消耗300W token……",
-      "url": "https://ddsz-peng13.feishu.cn/docx/QyDUdRcYLomQzMxsGCLcOD9knbg",
-      "tags": ["Cursor", "AI"],
-      "featured": false
+      "featured": true
     },
     {
       "title": "小玩具网站-随机抽个熬汤汤方",
