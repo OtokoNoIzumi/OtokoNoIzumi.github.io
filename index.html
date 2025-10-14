@@ -199,10 +199,8 @@
                     </div>
                 </div>
                 <div class="mt-8 text-center space-y-4">
-                    <a href="#" class="btn btn-outline inline-flex items-center" onclick="loadMorePosts()">
-                        <span>查看更多文章</span>
-                        <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
+                    <!-- 翻页控件容器 -->
+                    <div id="pagination-container"></div>
                     <!-- 本地测试功能 -->
                     <div id="local-test-controls" class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4" style="display: none;">
                         <h4 class="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">
@@ -624,11 +622,36 @@
 
         // 博客文章相关变量
         let blogPosts = [];
-        let displayedPostsCount = 3; // 初始显示3篇文章
+        let postsPerPage = 3; // 每页显示3篇文章
+        let currentPage = 1; // 当前页码
 
         // 临时嵌入的博客数据（本地测试用）
         const embeddedBlogData = {
             "posts": [
+                {
+                    "title": "时代的肖像 grok video 模型参数分析与实战",
+                    "date": "2025-10-09",
+                    "summary": "解锁 Grok 视频模型的结构化参数控制。从信息论视角出发，探索真正有效的参数化控制方法，结合 Meta Prompt 技术，创造连贯的视频叙事。",
+                    "url": "Diary/grok_imagen_research",
+                    "tags": ["AICG", "AI视频", "vibe", "meta prompt"],
+                    "featured": false
+                },
+                {
+                    "title": "Nano Banana 独家使用心得",
+                    "date": "2025-08-28",
+                    "summary": "介绍全网首个破千次生图发现的3个秘密",
+                    "url": "Diary/nano_secret_v4",
+                    "tags": ["AICG", "AI图片", "浏览器插件", "meta prompt"],
+                    "featured": false
+                },
+                {
+                    "title": "酒店预订价格策略设计方案",
+                    "date": "2025-07-26",
+                    "summary": "酒店预订价格策略设计方案",
+                    "url": "Diary/hotel_pricing_strategy_visual",
+                    "tags": ["流程再造", "管理实战"],
+                    "featured": true
+                },
                 {
                     "title": "随机抽个汤方",
                     "date": "2025-06-21",
@@ -1001,7 +1024,9 @@
             }
 
             // 保持JSON文件中的原始顺序，不进行自动排序
-            const postsToShow = blogPosts.slice(0, displayedPostsCount);
+            const startIndex = (currentPage - 1) * postsPerPage;
+            const endIndex = startIndex + postsPerPage;
+            const postsToShow = blogPosts.slice(startIndex, endIndex);
 
             container.innerHTML = postsToShow.map(post => `
                 <article class="card p-6 group hover:border-primary-500 dark:hover:border-primary-400 ${post.featured ? 'border-l-4 border-l-primary-500 dark:border-l-primary-400 bg-gradient-to-r from-primary-50/50 to-transparent dark:from-primary-900/10 dark:to-transparent' : ''}">
@@ -1032,8 +1057,8 @@
                 </article>
             `).join('');
 
-            // 更新"查看更多"按钮状态
-            updateMoreButton();
+            // 渲染翻页控件
+            renderPagination();
         }
 
         // 处理文章URL（支持相对路径和绝对路径）
@@ -1072,21 +1097,82 @@
             }
         }
 
-        // 加载更多文章
-        function loadMorePosts() {
-            displayedPostsCount += 3;
-            renderBlogPosts();
+        // 渲染翻页控件
+        function renderPagination() {
+            const totalPages = Math.ceil(blogPosts.length / postsPerPage);
+            const paginationContainer = document.getElementById('pagination-container');
+
+            if (!paginationContainer || totalPages <= 1) {
+                if (paginationContainer) {
+                    paginationContainer.innerHTML = '';
+                }
+                return;
+            }
+
+            let paginationHTML = '<div class="flex justify-center items-center space-x-2 mt-6">';
+
+            // 上一页按钮
+            if (currentPage > 1) {
+                paginationHTML += `
+                    <button onclick="goToPage(${currentPage - 1})" class="btn btn-outline text-sm">
+                        <i class="fas fa-chevron-left mr-1"></i>上一页
+                    </button>
+                `;
+            }
+
+            // 页码按钮
+            const startPage = Math.max(1, currentPage - 2);
+            const endPage = Math.min(totalPages, currentPage + 2);
+
+            if (startPage > 1) {
+                paginationHTML += `<button onclick="goToPage(1)" class="btn btn-outline text-sm">1</button>`;
+                if (startPage > 2) {
+                    paginationHTML += '<span class="text-gray-500 dark:text-gray-400">...</span>';
+                }
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                paginationHTML += `
+                    <button onclick="goToPage(${i})" class="btn ${i === currentPage ? 'btn-primary' : 'btn-outline'} text-sm">
+                        ${i}
+                    </button>
+                `;
+            }
+
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    paginationHTML += '<span class="text-gray-500 dark:text-gray-400">...</span>';
+                }
+                paginationHTML += `<button onclick="goToPage(${totalPages})" class="btn btn-outline text-sm">${totalPages}</button>`;
+            }
+
+            // 下一页按钮
+            if (currentPage < totalPages) {
+                paginationHTML += `
+                    <button onclick="goToPage(${currentPage + 1})" class="btn btn-outline text-sm">
+                        下一页<i class="fas fa-chevron-right ml-1"></i>
+                    </button>
+                `;
+            }
+
+            paginationHTML += '</div>';
+
+            // 添加页面信息
+            paginationHTML += `
+                <div class="text-center mt-3 text-sm text-gray-500 dark:text-gray-400">
+                    第 ${currentPage} 页，共 ${totalPages} 页，共 ${blogPosts.length} 篇文章
+                </div>
+            `;
+
+            paginationContainer.innerHTML = paginationHTML;
         }
 
-        // 更新"查看更多"按钮状态
-        function updateMoreButton() {
-            const moreButton = document.querySelector('a[onclick="loadMorePosts()"]');
-            if (moreButton) {
-                if (displayedPostsCount >= blogPosts.length) {
-                    moreButton.style.display = 'none';
-                } else {
-                    moreButton.style.display = 'inline-flex';
-                }
+        // 跳转到指定页面
+        function goToPage(page) {
+            const totalPages = Math.ceil(blogPosts.length / postsPerPage);
+            if (page >= 1 && page <= totalPages) {
+                currentPage = page;
+                renderBlogPosts();
             }
         }
 
