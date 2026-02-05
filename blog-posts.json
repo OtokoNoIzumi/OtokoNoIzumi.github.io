@@ -1,19 +1,19 @@
 {
   "posts": [
     {
+      "title": "芬利牌登顶心得与实时计算工具",
+      "date": "2026-02-05",
+      "summary": "在AI时代用外置大脑完成万千可能的极致探索",
+      "url": "Diary/fenli_analysis",
+      "tags": ["AI数字分身", "炉石传说", "工具"],
+      "featured": false
+    },
+    {
       "title": "时代的肖像 grok video 模型参数分析与实战",
       "date": "2025-10-09",
       "summary": "解锁 Grok 视频模型的结构化参数控制。从信息论视角出发，探索真正有效的参数化控制方法，结合 Meta Prompt 技术，创造连贯的视频叙事。",
       "url": "Diary/grok_imagen_research",
       "tags": ["AICG", "AI视频", "vibe", "meta prompt"],
-      "featured": false
-    },
-    {
-      "title": "Nano Banana 独家使用心得",
-      "date": "2025-08-28",
-      "summary": "介绍全网首个破千次生图发现的3个秘密",
-      "url": "Diary/nano_secret_v4",
-      "tags": ["AICG", "AI图片", "浏览器插件", "meta prompt"],
       "featured": false
     },
     {
@@ -23,6 +23,14 @@
       "url": "Diary/hotel_pricing_strategy_visual",
       "tags": ["流程再造", "管理实战"],
       "featured": true
+    },
+    {
+      "title": "Nano Banana 独家使用心得",
+      "date": "2025-08-28",
+      "summary": "介绍全网首个破千次生图发现的3个秘密",
+      "url": "Diary/nano_secret_v4",
+      "tags": ["AICG", "AI图片", "浏览器插件", "meta prompt"],
+      "featured": false
     }
   ]
 }
