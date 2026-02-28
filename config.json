@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "api": {
-        "adSkipServerBaseURL": "https://izumiai.site:3000"
+        "adSkipServerBaseURL": "https://izumiai.site"
     },
     "projects": {
         "adSkip": {
