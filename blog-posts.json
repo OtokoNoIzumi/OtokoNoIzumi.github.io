@@ -1,6 +1,14 @@
 {
   "posts": [
     {
+      "title": "你的体重秤，一直在骗你",
+      "date": "2026-04-05",
+      "summary": "减脂过程中3个反直觉的真相",
+      "url": "Diary/weight_truth",
+      "tags": ["AI数字分身", "AI营养师", "减脂"],
+      "featured": true
+    },
+    {
       "title": "芬利牌登顶心得与实时计算工具",
       "date": "2026-02-05",
       "summary": "在AI时代用外置大脑完成万千可能的极致探索",
