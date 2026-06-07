@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "api": {
-        "adSkipServerBaseURL": "https://bili.izumitech.com/"
+        "adSkipServerBaseURL": "https://bili.izumitech.com"
     },
     "projects": {
         "adSkip": {
